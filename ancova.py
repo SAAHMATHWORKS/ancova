@@ -11,6 +11,7 @@ import numpy as np
 from scipy import stats
 import seaborn as sns
 import statsmodels.api as sm
+import statsmodels.formula.api as smf
 from statsmodels.formula.api import ols
 from sklearn import linear_model
 from sklearn.model_selection import train_test_split
@@ -40,7 +41,7 @@ X = house_data1[["surface", "region_1", "region_2", "region_3","region_4","regio
 X = sm.add_constant(X) # une autre façons d'ajouter une constante
 y = house_data1["price"]
 
-model = sm.OLS(y, X)
+model = est = smf.ols(formula='price ~ surface * arrondissement', data=house_data1)
 results = model.fit()
 print(results.summary())
 
